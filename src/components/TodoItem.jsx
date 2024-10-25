@@ -110,6 +110,7 @@ const TodoItem = ({ todo, onToggleDone, onSave, onDelete, onChangeMode }) => {
     }
     if (event.key === 'Escape') {
       onChangeMode?.({ id: todo.id, isEdit: false });
+      inputRef.current.value = todo.title;
     }
   };
   return (
@@ -137,7 +138,7 @@ const TodoItem = ({ todo, onToggleDone, onSave, onDelete, onChangeMode }) => {
         />
       </div>
       <div className="task-item-action ">
-        <button className="btn-reset btn-destroy icon"></button>
+        <button className="btn-reset btn-destroy icon" onClick={() => onDelete?.(todo.id)}></button>
       </div>
     </StyledTaskItem>
   );
