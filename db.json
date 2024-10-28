@@ -22,12 +22,12 @@
     },
     {
       "title": "Learn data science",
-      "isDone": false,
+      "isDone": true,
       "id": 5
     },
     {
-      "title": "learn somthing",
-      "isDone": false,
+      "title": "learn somthingssg",
+      "isDone": true,
       "id": 6
     },
     {
