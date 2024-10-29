@@ -8,13 +8,15 @@ import { ACLogoIcon } from 'assets/images';
 import { AuthInput } from 'components';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { checkPermission, login } from 'api/auth';
 import Swal from 'sweetalert2';
+import { useAuth } from 'contexts/authContext';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+
+  const { login, isAuthenticated } = useAuth;
 
   const handleClick = async () => {
     if (username.length === 0) {
@@ -25,13 +27,12 @@ const LoginPage = () => {
       return;
     }
 
-    const { success, authToken } = await login({
+    const success = await login({
       username,
       password,
     });
 
     if (success) {
-      localStorage.setItem('authToken', authToken);
       Swal.fire({
         title: '登入成功',
         icon: 'success',
@@ -39,7 +40,6 @@ const LoginPage = () => {
         timer: 1000,
         position: 'top',
       });
-      navigate('/todos');
       return;
     }
 
@@ -51,6 +51,12 @@ const LoginPage = () => {
       position: 'top',
     });
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/todos');
+    }
+  }, [navigate, isAuthenticated]);
 
   return (
     <AuthContainer>

@@ -2,12 +2,13 @@ import { Footer, Header, TodoCollection, TodoInput } from 'components';
 import { useState, useEffect } from 'react';
 import { getTodos, createTodo, patchTodo, deleteTodo } from '../api/todos.js';
 import { useNavigate } from 'react-router-dom';
-import { checkPermission } from 'api/auth.js';
+import { useAuth } from 'contexts/authContext.jsx';
 
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   const handleChange = (value) => {
     setInputValue(value);
@@ -154,6 +155,12 @@ const TodoPage = () => {
     };
     getTodosAsync();
   }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [navigate, isAuthenticated]);
 
   return (
     <div>
