@@ -9,14 +9,14 @@ import { AuthInput } from 'components';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { useAuth } from 'contexts/authContext';
+import { useAuth } from 'contexts/AuthContext';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const { login, isAuthenticated } = useAuth;
+  const { login, isAuthenticated } = useAuth();
 
   const handleClick = async () => {
     if (username.length === 0) {

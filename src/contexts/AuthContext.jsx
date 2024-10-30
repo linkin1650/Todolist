@@ -1,7 +1,7 @@
 import { checkPermission, login, register } from 'api/auth';
 import { createContext, useContext, useEffect, useState } from 'react';
 import * as jwt from 'jsonwebtoken';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const defaultAuthContext = {
   isAuthenticated: false,
